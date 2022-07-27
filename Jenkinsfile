@@ -28,7 +28,7 @@ sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@ip-172-31-11-19:/opt/tom
 stage ('Check-Git-Secrets') {
 steps {
 sh 'rm trufflehog || true'
-sh 'docker run gesellix/trufflehog --json https://github.com/siddkhewal007/webapp.git > trufflehog'
+sh 'docker run gesellix/trufflehog --json https://github.com/Mrityunjay0010/webapp.git > trufflehog'
 sh 'cat trufflehog'
       }
     }
