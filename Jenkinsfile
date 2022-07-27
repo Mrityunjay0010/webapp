@@ -38,6 +38,7 @@ sh 'rmowasp* || true'
 sh 'wget "https://raw.githubusercontent.com/cehkunal/webapp/master/owasp-dependency-check.sh" '
 sh 'chmod +x owasp-dependency-check.sh'
 sh 'bash owasp-dependency-check.sh'
+sh 'docker run -t owasp/dependency-check --name dependency -t http://65.1.130.191'
 sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
 
      }
