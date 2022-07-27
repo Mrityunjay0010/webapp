@@ -19,18 +19,19 @@ pipeline {
            sh 'cat trufflehog'
       }
     }   
-	    stage ("Build Stage") {
-	      steps {
-	sh"mvn clean package"
-	      }
-	    }
-		stage ('Sonar-Qube') {
+	    stage ('Sonar-Qube') {
            steps {
            withSonarQubeEnv('Sonar') {
            sh 'mvn sonar:sonar'
         }
       }
     } 
+	    stage ("Build Stage") {
+	      steps {
+	sh"mvn clean package"
+	      }
+	    }
+		
 	    stage ('Deploy-To-Tomcat') {
            steps {
            sshagent(['Tomcat']) {
