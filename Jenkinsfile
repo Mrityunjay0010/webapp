@@ -32,6 +32,16 @@ sh 'docker run gesellix/trufflehog --json https://github.com/siddkhewal007/webap
 sh 'cat trufflehog'
       }
     }
+     stage ('Source Composition Analysis') {
+      steps {
+sh 'rmowasp* || true'
+sh 'wget "https://raw.githubusercontent.com/cehkunal/webapp/master/owasp-dependency-check.sh" '
+sh 'chmod +x owasp-dependency-check.sh'
+sh 'bash owasp-dependency-check.sh'
+sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
+
+     }
+    }
   }
 }
 
