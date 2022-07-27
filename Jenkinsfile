@@ -32,13 +32,6 @@ sh 'docker run gesellix/trufflehog --json https://github.com/Mrityunjay0010/weba
 sh 'cat trufflehog'
       }
     }   
- stage ('DAST') {
- steps {
-sshagent(['Tomcat']) {
-sh 'ssh -o  StrictHostKeyChecking=no ubuntu@ip-172-31-46-11 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://http://65.1.130.191:8080/webapp/" || true'
-        }
-      }
-    }
   }
 }
 
