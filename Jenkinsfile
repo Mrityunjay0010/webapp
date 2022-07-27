@@ -32,6 +32,13 @@ sh 'docker run gesellix/trufflehog --json https://github.com/siddkhewal007/webap
 sh 'cat trufflehog'
       }
     }
+		      stage ('Check-Git-Secrets') {
+      steps {
+sh 'rm trufflehog || true'
+sh 'docker run gesellix/trufflehog --json https://github.com/siddkhewal007/webapp.git > trufflehog'
+sh 'cat trufflehog'
+      }
+    }
   }
 }
 
