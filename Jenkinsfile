@@ -44,7 +44,7 @@ sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.
 		  stage ('DAST') {
       steps {
 sshagent(['Tomcat']) {
-sh 'ssh -o  StrictHostKeyChecking=no sidd@40.76.2.234 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://40.76.5.105:8080/webapp/" || true'
+sh 'ssh -o  StrictHostKeyChecking=no ubuntu@ip-172-31-46-11 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://http://65.1.130.191:8080/webapp/" || true'
         }
       }
     }
