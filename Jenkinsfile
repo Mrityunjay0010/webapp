@@ -38,10 +38,15 @@ sh 'rmowasp* || true'
 sh 'wget "https://raw.githubusercontent.com/cehkunal/webapp/master/owasp-dependency-check.sh" '
 sh 'chmod +x owasp-dependency-check.sh'
 sh 'bash owasp-dependency-check.sh'
-sh 'docker run -t owasp/dependency-check --name dependency -t http://65.1.130.191'
 sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
-
      }
+    }
+		  stage ('DAST') {
+      steps {
+sshagent(['Tomcat']) {
+sh 'ssh -o  StrictHostKeyChecking=no sidd@40.76.2.234 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://40.76.5.105:8080/webapp/" || true'
+        }
+      }
     }
   }
 }
