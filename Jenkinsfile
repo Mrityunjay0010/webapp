@@ -19,6 +19,13 @@ pipeline {
            sh 'cat trufflehog'
       }
     }        
+		  stage ('Sonar-Qube') {
+           steps {
+           withSonarQubeEnv('Sonar') {
+           sh 'mvn sonar:sonar'
+        }
+      }
+    } 
 	    stage ("Build Stage") {
 	      steps {
 	sh"mvn clean package"
