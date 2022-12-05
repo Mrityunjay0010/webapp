@@ -19,6 +19,13 @@ pipeline {
            sh 'cat trufflehog'
 	   }
 	}
+		  stage ('Sonar-Qube') {
+           steps {
+           withSonarQubeEnv('Sonar') {
+           sh 'mvn sonar:sonar'
+        }
+      }
+    } 
 	    stage ("Build Stage") {
 	      steps {
 	sh "mvn clean package"
@@ -31,6 +38,13 @@ pipeline {
               }      
            }       
 	 }
+		  stage ('DAST') {
+      steps {
+        sshagent(['tomcat']) {
+         sh 'ssh -o  StrictHostKeyChecking=no ubuntu@172.31.36.10 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://65.1.130.191:8080/webapp/" || true'
+        }
+      }
+    }
 	}
 }
 
